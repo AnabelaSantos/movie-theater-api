@@ -6,11 +6,11 @@ const { db } = require("./db");
 const port = 3000;
 app.use(express.json());
 
-const userRouter = require("./routers/usersRout.js");
+const userRouter = require("./routes/usersRout.js");
 
 app.use("/users", userRouter);
 
-const showRouter = require("./routers/showsRout.js");
+const showRouter = require("./routes/showsRout.js");
 
 app.use("/shows", showRouter);
 
