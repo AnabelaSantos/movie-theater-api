@@ -29,7 +29,7 @@ router.get("/:id/shows", async (req, res) => {
 // The User Router should update and add a show if a user has watched it using an endpoint.
 // For example, a PUT request to  /users/2/shows/9 should update the 9th show for the 2nd user.
 
-router.put("/:id/shows/:idShows", async (req, res, next) => {
+router.put("/:id/shows/:idShows", async (req, res) => {
   const user = await User.findByPk(req.params.id);
   const show = await Show.findByPk(req.params.idShows);
   await user.addShow(show);

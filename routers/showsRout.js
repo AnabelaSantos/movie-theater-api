@@ -25,10 +25,32 @@ router.get("/genres/:idGenre", async (req, res) => {
   res.json(show);
 });
 
+// The Show Router should update the status on a specific show from “cancelled”
+// to “on-going” or vice versa using an endpoint.
+// For example, a PUT request with the endpoint /shows/3/updates should be able to
+// update the 3rd show to “canceled” or “on-going”.
+
+router.put("/:id/updates", async (req, res) => {
+  const show = await Show.findByPk(req.params.id);
+  const currentStatus = show["status"];
+  let newStatus = "";
+  if (currentStatus === "cancelled") {
+    newStatus = "on-going";
+  } else {
+    newStatus = "cancelled";
+  }
+  show.update({
+    status: newStatus,
+  });
+  res.json(
+    `${show["title"]} was ${currentStatus} and is now ${show["status"]}!`
+  );
+});
+
 // The Show Router should update a rating on a specific show using an endpoint.
 // For example, a PUT request to /shows/4/watched would update the 4th show that has been watched.
 
-router.put("/:id/:status", async (req, res, next) => {
+router.put("/:id/:status", async (req, res) => {
   const show = await Show.findByPk(req.params.id);
   show.update({
     status: req.params.status,
