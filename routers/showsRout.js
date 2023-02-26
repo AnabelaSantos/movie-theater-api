@@ -58,4 +58,12 @@ router.put("/:id/:status", async (req, res) => {
   res.json(`${show["title"]} is ${show["status"]}!`);
 });
 
+// The Show Router should be able to delete a show.
+
+router.delete("/:id", async (req, res) => {
+  const show = await Show.findByPk(req.params.id);
+  show.destroy();
+  res.json(`${show["title"]} was deleted!`);
+});
+
 module.exports = router;
