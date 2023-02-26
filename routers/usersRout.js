@@ -30,7 +30,6 @@ router.get("/:id/shows", async (req, res) => {
 // For example, a PUT request to  /users/2/shows/9 should update the 9th show for the 2nd user.
 
 router.put("/:id/shows/:idShows", async (req, res, next) => {
-  //next() can be used to pass control to the next handler
   const user = await User.findByPk(req.params.id);
   const show = await Show.findByPk(req.params.idShows);
   await user.addShow(show);

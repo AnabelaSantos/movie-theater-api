@@ -25,4 +25,15 @@ router.get("/genres/:idGenre", async (req, res) => {
   res.json(show);
 });
 
+// The Show Router should update a rating on a specific show using an endpoint.
+// For example, a PUT request to /shows/4/watched would update the 4th show that has been watched.
+
+router.put("/:id/:status", async (req, res, next) => {
+  const show = await Show.findByPk(req.params.id);
+  show.update({
+    status: req.params.status,
+  });
+  res.json(`${show["title"]} is ${show["status"]}!`);
+});
+
 module.exports = router;
